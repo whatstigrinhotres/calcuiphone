@@ -160,8 +160,9 @@
         return String(rounded).replace('.', ',');
       };
       function render() {
-        display.textContent = expression || current;
-        display.classList.toggle('compact', (expression || current).length > 8);
+        const shown = expression ? expression + (waiting ? '' : ' ' + current) : current;
+        display.textContent = shown;
+        display.classList.toggle('compact', shown.length > 8);
         document.querySelectorAll('[data-op]').forEach(b => b.classList.toggle('selected', !waiting && operator === b.dataset.op));
         document.querySelector('[data-action="clear"]').textContent = current === '0' && !expression ? 'C' : 'C';
       }
